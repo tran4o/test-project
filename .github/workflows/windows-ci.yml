@@ -29,12 +29,6 @@ jobs:
           # Include the package version in the key so that
           # any version change busts the cache automatically.
           key: ${{ runner.os }}-vision-rengine-11.0.0-alpha2
-         
-      - name: Create Work Directory
-        run: |
-          mkdir C:\work
-          cd C:\work
-        shell: cmd
 
       - name: Checkout Repository
         uses: actions/checkout@v4

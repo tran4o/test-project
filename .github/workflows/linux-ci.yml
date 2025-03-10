@@ -36,12 +36,6 @@ jobs:
           path: "/opt/hostedtoolcache/node/${{ steps.get_node_version.outputs.version }}/x64/lib"  #/node_modules/@visionr/engine
           key: ${{ runner.os }}-vision-rengine-11.0.0-alpha2
 
-      - name: Create Work Directory (Linux)
-        run: |
-          mkdir -p ~/work
-          cd ~/work
-        shell: bash
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
