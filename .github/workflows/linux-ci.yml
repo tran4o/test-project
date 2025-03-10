@@ -22,23 +22,20 @@ jobs:
 
       - name: Retrieve Node version
         id: get_node_version
-        # We'll store the raw output of `node --version`, strip the leading 'v',
-        # and write it as `version` to $GITHUB_OUTPUT
         run: |
           echo "version=$(node --version | sed 's/^v//')" >> $GITHUB_OUTPUT
       
-      - name: Prints the node version
-        run: |
-          echo "NODE VERSION IS : ${{ steps.get_node_version.outputs.version }}"
+      #- name: Prints the node version
+      #  run: |
+      #    echo "NODE VERSION IS : ${{ steps.get_node_version.outputs.version }}"
 
       - name: Setup cache (Linux)
         id: cache-visionr
         uses: actions/cache@v4
         with:
           path: |
-            "/opt/hostedtoolcache/node/${{ steps.get_node_version.outputs.version }}/x64/lib"  # 'node_modules' is there
-            "/opt/hostedtoolcache/node/${{ steps.get_node_version.outputs.version }}/x64/bin"  # 'bin' scripts
-          key: ${{ runner.os }}-visionr-engine-cache-${{ env.VISIONR_VERSION }}
+            "/opt/hostedtoolcache/node/22.14.0/x64"
+          key: ${{ runner.os }}-visionr-engine-c1-${{ env.VISIONR_VERSION }}
 
       - name: Checkout Repository
         uses: actions/checkout@v4
