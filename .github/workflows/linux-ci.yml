@@ -1,0 +1,48 @@
+name: Build on Linux (Ubuntu)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-ubuntu:
+    if: true   # ENABLED 
+    name: Linux (Ubuntu) build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup cache (Linux)
+        id: cache-visionr
+        uses: actions/cache@v4
+        with:
+          # Cache the global npm installation folder on Linux
+          # Default global prefix is often /usr/local, but you can verify
+          # by running `npm prefix -g` locally or specify your own.
+          path: /usr/local/
+          key: ${{ runner.os }}-vision-rengine-11.0.0-alpha2
+
+      - name: Create Work Directory (Linux)
+        run: |
+          mkdir -p ~/work
+          cd ~/work
+        shell: bash
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install VisionR-Engine Globally (Linux)
+        if: steps.cache-visionr.outputs.cache-hit != 'true'
+        run: |
+          echo "Installing VisionR-Engine globally..."
+          npm install -g https://github.com/plan-vision/visionr-engine.binary/releases/download/11.0.0-alpha2/visionr-engine-NPM-package-11.0.0-alpha2.tar.gz
+
+      - name: Compiling the project (Linux)
+        run: vrs compile
+        shell: bash

@@ -1,4 +1,4 @@
-name: Windows CI Build
+name: Build on Windows
 
 on:
   push:
@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    if: false   # DISABLED 
+    name: Windows build
     runs-on: windows-latest
 
     steps:
@@ -27,9 +29,7 @@ jobs:
           # Include the package version in the key so that
           # any version change busts the cache automatically.
           key: ${{ runner.os }}-vision-rengine-11.0.0-alpha2
-          restore-keys: |
-            ${{ runner.os }}-vision-rengine-
-
+         
       - name: Create Work Directory
         run: |
           mkdir C:\work
