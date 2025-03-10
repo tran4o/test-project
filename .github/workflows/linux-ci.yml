@@ -5,9 +5,10 @@ on:
       - main
   pull_request:
 
+# linux does downloading and extraction fast, skip cache configuration
+
 jobs:
   build-ubuntu:
-    if: true   # ENABLED 
     name: Linux (Ubuntu) build
     runs-on: ubuntu-latest
 
@@ -19,23 +20,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
-      - name: Retrieve Node version
-        id: get_node_version
-        run: |
-          echo "version=$(node --version | sed 's/^v//')" >> $GITHUB_OUTPUT
-      
-      #- name: Prints the node version
-      #  run: |
-      #    echo "NODE VERSION IS : ${{ steps.get_node_version.outputs.version }}"
-
-      - name: Setup cache (Linux)
-        id: cache-visionr
-        uses: actions/cache@v4
-        with:
-          path: |
-            "/opt/hostedtoolcache/node/22.14.0/x64"
-          key: ${{ runner.os }}-visionr-engine-c1-${{ env.VISIONR_VERSION }}
 
       - name: Checkout Repository
         uses: actions/checkout@v4
