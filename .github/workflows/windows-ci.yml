@@ -11,6 +11,9 @@ jobs:
     if: false   # DISABLED 
     name: Windows build
     runs-on: windows-latest
+    
+    env:
+      VISIONR_VERSION: 11.0.0-alpha2
 
     steps:
       - name: Set up Node.js
@@ -28,7 +31,7 @@ jobs:
             C:/npm/prefix/
           # Include the package version in the key so that
           # any version change busts the cache automatically.
-          key: ${{ runner.os }}-vision-rengine-11.0.0-alpha2
+          key: ${{ runner.os }}-vision-rengine-${{ env.VISIONR_VERSION }}
 
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -37,7 +40,7 @@ jobs:
         if: steps.cache-visionr.outputs.cache-hit != 'true'
         run: |
           echo Installing VisionR-Engine globally...
-          npm install -g https://github.com/plan-vision/visionr-engine.binary/releases/download/11.0.0-alpha2/visionr-engine-NPM-package-11.0.0-alpha2.tar.gz
+          npm install -g https://github.com/plan-vision/visionr-engine.binary/releases/download/${{ env.VISIONR_VERSION }}/visionr-engine-NPM-package-${{ env.VISIONR_VERSION }}.tar.gz
         shell: cmd
 
       - name: Compiling the project
