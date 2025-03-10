@@ -18,14 +18,22 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Retrieve Node version
+        id: get_node_version
+        # We'll store the raw output of `node --version`, strip the leading 'v',
+        # and write it as `version` to $GITHUB_OUTPUT
+        run: |
+          echo "version=$(node --version | sed 's/^v//')" >> $GITHUB_OUTPUT
+      
+      - name: Prints the node version
+        run: |
+          echo "NODE VERSION IS : ${{ steps.get_node_version.outputs.version }}"
+
       - name: Setup cache (Linux)
         id: cache-visionr
         uses: actions/cache@v4
         with:
-          # Cache the global npm installation folder on Linux
-          # Default global prefix is often /usr/local, but you can verify
-          # by running `npm prefix -g` locally or specify your own.
-          path: /usr/local/
+          path: "/opt/hostedtoolcache/node/${{ steps.get_node_version.outputs.version }}/x64/lib"  #/node_modules/@visionr/engine
           key: ${{ runner.os }}-vision-rengine-11.0.0-alpha2
 
       - name: Create Work Directory (Linux)
