@@ -1,6 +1,6 @@
 {
     "name": "test-project",
-    "version": "0.0.4-test2",
+    "version": "0.0.4-test3",
     "scripts": {
         "clean:temp": "vrs clean data work target log -force",
         "reset:all": "vrs clean data work target log upload -force && npm run build && npm run import",
