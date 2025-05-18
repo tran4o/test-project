@@ -1,4 +1,8 @@
 name: Build on Linux (Ubuntu)
+
+permissions:
+  contents: write  # Needed for 'gh release create' to work with GITHUB_TOKEN
+
 on:
   push:
     branches:
