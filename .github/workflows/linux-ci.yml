@@ -32,6 +32,8 @@ jobs:
           npm install -g https://github.com/plan-vision/visionr-engine.binary/releases/download/${{ env.VISIONR_VERSION }}/visionr-engine-NPM-package-${{ env.VISIONR_VERSION }}.tar.gz
 
       - name: Compile release and upload to GitHub  
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm run release
         shell: bash
