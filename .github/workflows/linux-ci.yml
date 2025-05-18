@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VISIONR_VERSION: 11.0.0-alpha2
+      VISIONR_VERSION: 11.0.0-alpha3.2
       PROJECT_NAME: test-project
 
     steps:
