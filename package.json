@@ -19,10 +19,10 @@
 		"build:generated" : "npm run compile:changelog",
 		"build:full.clean" : "npm run clean:temp && npm run build && npm run build:native",
 		
-		"zip:source" : "vrs backup target/test-project-$NPM_PACKAGE_VERSION$-source.zip full -devel",
+		"zip:source" : "vrs backup target/test-project-NPM_PACKAGE_VERSION-source.zip full -devel",
 
-		"zip:update" : "vrs backup target/test-project-$NPM_PACKAGE_VERSION$-update-$OS_NATIVE_IDENT$.zip full native",
-		"zip:release" : "vrs backup target/test-project-$NPM_PACKAGE_VERSION$-release-$OS_NATIVE_IDENT$.zip full native db upload -dbformat json",
+		"zip:update" : "vrs backup target/test-project-NPM_PACKAGE_VERSION-update.zip full native",
+		"zip:release" : "vrs backup target/test-project-NPM_PACKAGE_VERSION-release.zip full native db upload -dbformat json",
 
 		"compile:changelog":"vr run @visionr/engine/gen-git-changelog",
 

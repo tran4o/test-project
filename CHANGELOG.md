@@ -1,3 +1,12 @@
+## 0.0.4-test4
+
+### general
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [b402b36](https://github.com/tran4o/test-project/commit/b402b360de2c0b97c78bc70b0ab60bfbfdc4a1ad) | 2025-05-18 09:39 | update | change linux-ci.yml permissions contents |
+| [5ba0a31](https://github.com/tran4o/test-project/commit/5ba0a311afb0765af0589c227200292d45984749) | 2025-05-18 09:33 | update | add env GH_TOKEN in npm run release |
+| [e25a852](https://github.com/tran4o/test-project/commit/e25a852cd6acfa08af6c01677ae73f850b48142a) | 2025-05-18 08:58 | update | fix package.json and add release notes |
+
 ## 0.0.4
 
 ### general
