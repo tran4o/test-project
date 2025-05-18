@@ -2,24 +2,34 @@
     "name": "test-project",
     "version": "0.0.4-test4",
     "scripts": {
-        "clean:temp": "vrs clean data work target log -force",
-        "reset:all": "vrs clean data work target log upload -force && npm run build && npm run import",
-        "reset": "npm run clean:temp && npm run build && npm run import",
+      	"update": "vrs compile && vr s import modules",
+		"update:devel": "vrs compile -devel && vr s import modules",
+		"import": "vrs import",
+		"start": "vrs start -devel -chromedebugport 9000",
+		"devel": "vrs start -devel",
+		"prod": "vrs start",
+		"clean:temp" : "vrs clean data work target log -force",
+
+		"reset": "npm run clean:temp && npm run build && npm run import",
+		"reset:all": "vrs clean data work target log upload -force && npm run build && npm run import",
+		
         "build": "vrs compile",
-        "build:devel": "vrs compile",
-		"build:generated": "npm run generate:changelog",
-        "build:full.clean": "npm run clean:temp && npm run build",
-        "update": "vrs compile && vrs import modules",
-        "update:devel": "vrs compile -devel && vrs import modules",
-        "import": "vrs import",
-        "start": "vrs start -devel -chromedebugport 9000",
-        "devel": "vrs start -devel",
-        "prod": "vrs start",
+		"build:native": "vrs compile native",
+		"build:devel": "vrs compile",
+		"build:generated" : "npm run compile:changelog",
+		"build:full.clean" : "npm run clean:temp && npm run build && npm run build:native",
+		
+		"zip:source" : "vrs backup target/test-project-$NPM_PACKAGE_VERSION$-source.zip full -devel",
+
+		"zip:update" : "vrs backup target/test-project-$NPM_PACKAGE_VERSION$-update-$OS_NATIVE_IDENT$.zip full native",
+		"zip:release" : "vrs backup target/test-project-$NPM_PACKAGE_VERSION$-release-$OS_NATIVE_IDENT$.zip full native db upload -dbformat json",
+
+		"compile:changelog":"vr run @visionr/engine/gen-git-changelog",
+
+		"build:update" : "npm run build:full.clean && npm run import && npm run build:generated && npm run zip:source && npm run zip:update",
 		"build:release" : "npm run build:full.clean && npm run import && npm run build:generated && npm run zip:source && npm run zip:update && npm run zip:release",
-        "zip:source": "vrs backup target/test-project-$NPM_PACKAGE_VERSION$-source.zip full -devel",
-        "zip:update": "vrs backup target/test-project-$NPM_PACKAGE_VERSION$-update.zip full",
-        "zip:release": "vrs backup target/test-project-$NPM_PACKAGE_VERSION$-release.zip full db -dbformat json",
-        "release": "npm run build:release && vr run @visionr/engine/upl-git-release"
+		"upload:release" : "vr run @visionr/engine/upl-git-release",
+		"release" : "npm run build:release && npm run upload:release"
     },
     "author": "",
     "license": "ISC",
